@@ -153,3 +153,15 @@ Orchestrateur : session_01HPjfkZdEgT98KC14wMjxxj (origin `desktop_app`, cloud).
 - Écrire la confiance dans ~/.claude.json → refusé : « [Self-Modification] ». Non contourné.
 - `list_computer_folders` → `{"folders":[]}` : aucun dossier du Mac partagé, impossible d'aller sur le Mac.
 - Le test local est donc à lancer sur le Mac : pilotage/TEST-LOCAL.md.
+
+# Tour 5 : skill pilote 0.2.0 sans arsenal, exemples du tutoriel
+
+## Exemples 1 et 2 (session test-pilote-tuto, environnement par défaut, `/pilote …`) : OK
+- Rapport : tableau « poème · Fini · Rien / courses · Fini · Rien » ; « courses : Pain / Lait / Œufs / Pommes / Café » ; haïku mer « Vague après vague / la mer efface nos pas / le sel reste au cœur » ; haïku montagne « Sommet dans la brume / le silence des glaciers / monte jusqu'au ciel » ; « Erreurs : aucune. »
+
+## Exemple 4 (skill pilote invoquée dans cette session) : OK
+- Lancer « test-pilote-redac », puis `interrupt_session`. Point d'étape reçu : « fait : paragraphe 1/3 écrit dans velo.txt … reste : paragraphes 2 et 3 ».
+- Repartir de zéro : archive + nouvel agent. Il répond : « je ne connais que sa note d'étape … velo.txt n'existait pas dans mon conteneur ».
+- Relancer l'ancien (`unarchive_session` + `send_message`) : « Avant l'interruption : paragraphe 1/3 écrit dans /home/user/velo.txt … ».
+- Fermer tout : toutes les sessions sont ARCHIVED.
+- `/pilote` et `/pilote:pilote` chargent tous les deux la skill (`--plugin-dir pilote.zip`).

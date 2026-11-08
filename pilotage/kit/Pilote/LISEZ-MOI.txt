@@ -1,0 +1,9 @@
+PILOTE : diriger plusieurs agents Claude depuis Claude Desktop, sans terminal.
+
+1. Ouvre Claude Desktop.
+2. Va dans Customize > Plugins > Add > Upload plugin, et choisis le fichier pilote.zip de ce dossier.
+3. Ouvre l'onglet Code, démarre une nouvelle session et écris par exemple :
+   /pilote Lance deux agents : « poème » qui écrit un haïku sur la mer, et « courses » qui écrit une liste de 5 courses.
+
+Ensuite tu parles normalement : « Où on en est ? », « Dis à poème de… », « Arrête courses », « Ferme tout ».
+Tous les exemples : ouvre Tutoriel.html.

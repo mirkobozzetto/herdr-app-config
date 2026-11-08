@@ -30,4 +30,5 @@ L'utilisateur ne tape aucune commande. Parle simplement : jamais d'identifiant, 
 - Pour attendre un agent, termine ton tour : son message te réveille. Pas de sleep.
 - Quand un agent t'écrit, résume son message à l'utilisateur en une ligne.
 - Les agents tournent dans le cloud d'Anthropic : ils ne voient pas les fichiers de l'ordinateur. Pour travailler sur un projet, il faut son repo GitHub (`source_url`).
+- Chaque agent a son propre espace : un nouvel agent ne voit pas les fichiers d'un autre. Pour garder ou partager des fichiers, travaille sur un repo GitHub, sinon recopie le contenu dans le prompt.
 - Ne touche jamais une session que tu n'as pas créée.

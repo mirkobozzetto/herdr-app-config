@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pilote, le tutoriel</title>
+<style>
+:root{--bg:#faf9f6;--fg:#1f1e1b;--muted:#6b675f;--card:#fff;--line:#e6e2da;--accent:#c2552d}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1b19;--fg:#eceae4;--muted:#a39e94;--card:#262522;--line:#3a3833;--accent:#e07a52}}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 -apple-system,system-ui,sans-serif}
+main{max-width:720px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:30px;margin:0 0 4px}h2{font-size:20px;margin:36px 0 10px}
+p.lead{color:var(--muted);margin:0 0 24px}
+ol{padding-left:22px}li{margin:6px 0}
+.say{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:10px 14px;margin:10px 0;font-family:ui-monospace,Menlo,monospace;font-size:15px;white-space:pre-wrap}
+table{border-collapse:collapse;width:100%;font-size:15px}td,th{border:1px solid var(--line);padding:6px 10px;text-align:left}
+.note{color:var(--muted);font-size:15px}
+</style></head><body><main>
+<h1>Pilote</h1>
+<p class="lead">Tu parles à un Claude, il lance et dirige les autres pour toi. Pas de terminal.</p>
+
+<h2>Installer (une fois, 1 minute)</h2>
+<ol>
+<li>Ouvre <b>Claude Desktop</b>.</li>
+<li>Va dans <b>Customize &gt; Plugins &gt; Add &gt; Upload plugin</b> et choisis <b>pilote.zip</b> (dans ce dossier).</li>
+<li>Ouvre l'onglet <b>Code</b> et démarre une nouvelle session.</li>
+</ol>
+<p class="note">Tes agents apparaissent dans la barre latérale, rangés sous ta session.</p>
+
+<h2>1. Deux agents en parallèle</h2>
+<div class="say">/pilote Lance deux agents : « poème » qui écrit un haïku sur la mer, et « courses » qui écrit une liste de 5 courses.</div>
+<div class="say">Où on en est ?</div>
+<table><tr><th>Agent</th><th>État</th><th>Ce qu'il attend</th></tr>
+<tr><td>poème</td><td>Fini</td><td>Rien</td></tr><tr><td>courses</td><td>Fini</td><td>Rien</td></tr></table>
+
+<h2>2. Parler à un agent</h2>
+<div class="say">Dis à « poème » d'écrire un deuxième haïku, sur la montagne.</div>
+<p class="note">L'agent fait le travail, Claude te résume sa réponse en une ligne.</p>
+
+<h2>3. Travailler sur un projet GitHub</h2>
+<div class="say">/pilote Lance un agent « relecture » sur github.com/moi/mon-site qui relit le README et liste les fautes.</div>
+
+<h2>4. Arrêter, repartir de zéro, relancer, fermer</h2>
+<div class="say">Arrête « relecture ».</div>
+<div class="say">Repars de zéro avec « relecture » : garde seulement ce qui est fait et ce qui reste.</div>
+<div class="say">Relance « poème ».</div>
+<div class="say">Ferme tout.</div>
+
+<h2>Bon à savoir</h2>
+<ul>
+<li>Les agents travaillent dans le cloud d'Anthropic, pas sur ton ordinateur. Pour un projet, il faut son lien GitHub.</li>
+<li>Chaque agent a son propre espace : un nouvel agent ne voit pas les fichiers d'un autre. Pour garder des fichiers, travaille sur un projet GitHub.</li>
+<li>Ils te préviennent tout seuls quand ils ont fini.</li>
+<li>Claude ne touche qu'aux agents qu'il a lancés lui-même.</li>
+</ul>
+</main></body></html>
