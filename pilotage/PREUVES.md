@@ -109,3 +109,39 @@ Orchestrateur : session_01HPjfkZdEgT98KC14wMjxxj (origin `desktop_app`, cloud).
 
 ## Fermeture tour 2 : OK
 - f, g, g-enfant (archivée par g), h, i → `SESSION_STATUS_ARCHIVED`.
+
+# Tour 3 : ce que j'avais oublié
+
+## Hook SessionStart de next : OK (local et cloud)
+- Hooks d'arsenal : next → `SessionStart` (matcher `startup|clear`) : `scan.cjs --banner --claude-code` ; trace → `Stop` : `trace.cjs --hook` et `SessionEnd` : `trace.cjs --digest`.
+- Sans travail ouvert : `claude -p … --include-hook-events` → `hook_response SessionStart:startup exit_code 0 outcome success stdout ""`. Le bandeau est vide, rien à reprendre.
+- Avec travail ouvert (`/trace:trace` a écrit `.claude/trace.md` : « save 2026-11-08T19:14:01Z … left: ajouter 'au revoir' »), nouvelle session :
+  - stdout du hook : « LATEST: ajouter une ligne 'au revoir' à hello.txt … RESUME (left by the last sessions) … »
+  - réponse de Claude : « On reprend : ajouter une ligne 'au revoir' à hello.txt ? »
+- Cloud (test-pilote-j, env Arsenal, repo sur la branche avec `.claude/trace.md`) : « SessionStart:startup hook success: LATEST: ajouter une ligne 'test cloud OK' à pilotage/HANDOFF.md … RESUME … »
+
+## trace → /clear → next (le /clear d'arsenal) : OK
+- Le cycle trace, nouvelle session, hook next, « On reprend : … ? » marche sans aucune commande de reprise.
+
+## nap (/clear sur soi-même) : KO hors terminal
+- README de nap : il tape `/clear` via `hc` (Herdr app), `herdr` ou `tmux` ; sans multiplexeur : « nothing: the answer ends with « Tu peux /clear. » ».
+
+## /clear envoyé par send_message : KO
+- `send_message(test-pilote-j, "/clear")` → reçu comme donnée : `<cross-session-message …> /clear </cross-session-message>`, non exécuté.
+- À l'inverse, une commande en tête du prompt de `create_session` est exécutée (`/next:next` → skill lancé).
+
+## Piège trouvé : .claude/.trace-state
+- Dans une session cloud sur un repo, le hook Stop du cloud renvoie : « There are untracked files in the repository. Please commit and push these changes to the remote branch. » à cause de `?? .claude/.trace-state` (fichier d'état de trace). À mettre dans `.gitignore`.
+
+## Plugin pilote en zip : se charge
+- `claude plugin validate pilotage/plugin/pilote` → « √ Validation passed ».
+- `claude -p … --plugin-dir pilotage/plugin/pilote.zip` → init : plugin `pilote`, skill `pilote:pilote`.
+- Les sessions headless (`claude -p`) n'ont pas les outils claude-code-remote : mcp_servers = seulement brand-voice. Le pilotage se teste donc dans une vraie session cloud.
+
+## Skill pilote dans une vraie session cloud : OK
+- Copie temporaire du skill dans `.claude/skills/pilote/` (commit 2c58fda), puis `create_session(test-pilote-k, prompt="/pilote Test…", source_url=branche, environment_id=Arsenal)`.
+- Rapport reçu : « Contenu reçu de l'enfant : ZIP … Fermeture : archive_session OK … Environnement utilisé : Arsenal (env_01HGYvLXHVk3UtjTfCHesRia), permission_mode auto … Erreurs : aucune. »
+- Le skill a trouvé tout seul l'environnement Arsenal et appliqué les règles (mode auto, @parent).
+
+## Notification téléphone (équivalent ntfy) : envoyée
+- `PushNotification("Test pilote : notif « agent needs you »…")` → « Mobile push requested. » (réception à confirmer par Mirko).
