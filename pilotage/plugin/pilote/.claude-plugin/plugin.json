@@ -1,7 +1,7 @@
 {
   "name": "pilote",
-  "version": "0.1.0",
-  "description": "Pilote d'autres sessions Claude Code depuis Claude Desktop ou le web, comme Herdr : créer, écrire, lire, tableau de bord, interrompre, vider, relancer, fermer.",
+  "version": "0.2.0",
+  "description": "Piloter d'autres sessions Claude Code depuis Claude Desktop, sans terminal : lancer des agents, voir où ils en sont, leur parler, les arrêter, repartir de zéro, les relancer, les fermer.",
   "author": { "name": "Mirko Bozzetto", "url": "https://github.com/mirkobozzetto" },
   "license": "MIT",
   "homepage": "https://github.com/mirkobozzetto/herdr-app-config/tree/main/pilotage"
