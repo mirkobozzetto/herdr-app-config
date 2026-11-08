@@ -18,15 +18,24 @@ Tutoriel : [TUTORIEL.md](TUTORIEL.md). Preuves brutes : [PREUVES.md](PREUVES.md)
 | Projet GitHub | « Lance un agent sur github.com/… » | fichier du repo lu, mot de contrôle renvoyé |
 | Voir dans Desktop | barre latérale | agents rangés sous la session (vu par Mirko) |
 
+## Deux modes, choisis tout seuls
+
+| | Mode cloud | Mode local (tmux ou Herdr) |
+|---|---|---|
+| Quand | session cloud de Desktop | session locale de Desktop, sur le Mac |
+| Fichiers du Mac | non, il faut un repo GitHub | oui |
+| Fichiers entre agents | non, chacun son espace | oui, même disque |
+| `/clear` d'un agent | « Repars de zéro » (nouvel agent) | vrai `/clear`, tapé dans son terminal |
+| `/clear` de soi | non | oui si Pilote tourne dans tmux ou Herdr ; non dans la fenêtre Desktop |
+| Agents dans la barre Desktop | oui | non, ils sont dans tmux ou Herdr |
+| Testé | oui, 100 % | tmux : oui, 100 % · Herdr : commandes reprises de tes mods, pas lancées ici |
+
 ## Ce qui ne marche pas
 
 | Geste | Pourquoi |
 |---|---|
-| Agents sur les fichiers du Mac | les agents tournent dans le cloud d'Anthropic, il faut un repo GitHub |
-| Partager des fichiers entre agents | chaque agent a son propre espace, sauf via un repo GitHub |
-| `/clear` envoyé à un agent | reçu comme texte, pas exécuté. « Repars de zéro » le remplace |
-| `/clear` sur soi-même | aucun outil |
-| Session locale de Desktop (sur le Mac) | pas testable d'ici : `claude --bg` refusé (« Workspace not trusted »), aucun dossier du Mac partagé |
+| `/clear` de Pilote dans la fenêtre Desktop | elle n'est pas un terminal : ouvrir une nouvelle session |
+| Mode Herdr testé ici | herdr.dev bloqué par le réseau du cloud, compilation refusée par le classifieur |
 
 ## Fichiers
 

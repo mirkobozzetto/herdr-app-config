@@ -1,6 +1,6 @@
 {
   "name": "pilote",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Piloter d'autres sessions Claude Code depuis Claude Desktop, sans terminal : lancer des agents, voir où ils en sont, leur parler, les arrêter, repartir de zéro, les relancer, les fermer.",
   "author": { "name": "Mirko Bozzetto", "url": "https://github.com/mirkobozzetto" },
   "license": "MIT",

@@ -40,9 +40,15 @@ L'agent fait le travail et Claude te résume sa réponse en une ligne.
 
 > Ferme tout.
 
+## Sur ton Mac, avec tes fichiers
+
+Ouvre une session **locale** dans l'onglet Code (sur un dossier de ton Mac). Pilote lance alors les agents sur ton Mac, dans Herdr si tu l'as, sinon dans tmux (`brew install tmux`). Ils travaillent sur tes vrais fichiers, et « Repars de zéro » fait un vrai `/clear`.
+
+> /pilote Lance un agent « rangement » qui trie les fichiers du dossier Factures par année.
+
 ## Bon à savoir
 
-- Les agents travaillent dans le cloud d'Anthropic, pas sur ton ordinateur. Pour un projet, il faut son lien GitHub.
+- En session cloud, les agents travaillent chez Anthropic, pas sur ton ordinateur. Pour un projet, il faut son lien GitHub.
 - Chaque agent a son propre espace : un nouvel agent ne voit pas les fichiers d'un autre. Pour garder des fichiers, travaille sur un projet GitHub.
 - Ils te préviennent tout seuls quand ils ont fini.
 - Claude ne touche qu'aux agents qu'il a lancés lui-même.

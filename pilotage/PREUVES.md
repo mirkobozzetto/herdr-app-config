@@ -165,3 +165,31 @@ Orchestrateur : session_01HPjfkZdEgT98KC14wMjxxj (origin `desktop_app`, cloud).
 - Relancer l'ancien (`unarchive_session` + `send_message`) : « Avant l'interruption : paragraphe 1/3 écrit dans /home/user/velo.txt … ».
 - Fermer tout : toutes les sessions sont ARCHIVED.
 - `/pilote` et `/pilote:pilote` chargent tous les deux la skill (`--plugin-dir pilote.zip`).
+
+# Tour 6 : mode local (tmux), sur la même machine
+
+Herdr : refusé ici. herdr.dev bloqué (proxy 403), compilation depuis GitHub refusée par le classifieur (« [Code from External] »). tmux est installé : même principe que `hc` (taper dans un terminal, lire l'écran).
+
+| Geste | Commande | Preuve |
+|---|---|---|
+| Créer | `tmux new-session -d -s pilote-poeme … "claude --session-id <uuid> --permission-mode acceptEdits"` | ListAgents : « herdr-app-config-4e · interactive · busy · tmux pilote-poeme:@0.%0 » |
+| Écrire | `tmux send-keys -l "<texte>"` puis `send-keys Enter` à part | `.pilote-test/ok.txt` = UN |
+| Écrire (messagerie) | `SendMessage` au nom ListAgents | l'agent ajoute DEUX |
+| Réponse spontanée | l'agent appelle SendMessage | reçu : « Contenu de .pilote-test/ok.txt après ajout de la ligne DEUX : UN DEUX » et « Haïku … Vague après vague / la mer efface nos pas » |
+| Tableau | `ListAgents` | 2 agents : « busy · tmux test-pilote-ta3 » et « idle · tmux test-pilote-tb » |
+| Parallèle | 2 sessions tmux | `test-pilote-ta3.txt` et `test-pilote-tb.txt` écrits |
+| Lire | `tmux capture-pane -p` | écran de l'agent lu |
+| Interrompre | `send-keys Escape` | « esc to interrupt » puis arrêt ; `trains.txt` jamais créé |
+| /clear d'un agent | `send-keys -l "/clear"` puis Enter | « Aucun : la conversation vient d'être effacée avec /clear » |
+| /clear de soi | `(sleep 8; tmux send-keys -t "$TMUX_PANE" -l /clear; …) &` | « Je n'ai aucun mot en mémoire. La commande /clear a effacé tout le contexte » (ZEBRE oublié) |
+| Relancer | `claude --resume <uuid>` | « Vague après vague / la mer efface nos pas — / le sel reste seul » retrouvé |
+| Fermer | `tmux kill-session -t pilote-<nom>` | « no server running », ListAgents : « No reachable agents » |
+| Fichiers partagés | même disque | une 2e session (`claude -p`) lit « UN DEUX » écrit par la 1re |
+
+Pièges trouvés et corrigés dans la skill :
+- `claude --continue` reprend la conversation la plus récente du dossier, ici celle de l'orchestrateur. La skill impose `--session-id <uuid>` à la création et `--resume <uuid>` pour relancer.
+- Le texte et Enter doivent partir en deux `send-keys` séparés.
+- `tmux kill-server` est refusé (« [Interfere With Workloads] ») : la skill ne ferme que ses sessions `pilote-*`.
+- 1er lancement dans un dossier : thème, notes de sécurité, « Yes, I trust this folder ». Sur le Mac, les dossiers déjà ouverts dans Claude sont déjà de confiance.
+
+Non testé ici : le mode Herdr (`hc`), faute de Herdr dans le cloud. Les commandes de la skill sont celles qu'utilisent les mods du repo (`hc run --bg`, `hc ls --json`, `hc send`, `hc keys`, `hc read`, `hc kill`) et nap (`hc keys <t> / c l e a r enter`).

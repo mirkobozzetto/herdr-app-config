@@ -6,4 +6,5 @@ PILOTE : diriger plusieurs agents Claude depuis Claude Desktop, sans terminal.
    /pilote Lance deux agents : « poème » qui écrit un haïku sur la mer, et « courses » qui écrit une liste de 5 courses.
 
 Ensuite tu parles normalement : « Où on en est ? », « Dis à poème de… », « Arrête courses », « Ferme tout ».
+Pour travailler sur les fichiers de ton Mac : ouvre une session locale dans l'onglet Code. Il faut Herdr ou tmux (brew install tmux).
 Tous les exemples : ouvre Tutoriel.html.
