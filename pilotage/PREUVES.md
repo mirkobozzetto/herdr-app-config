@@ -83,3 +83,29 @@ Orchestrateur : session_01HPjfkZdEgT98KC14wMjxxj (origin `desktop_app`, cloud).
 
 ## T13 fermer : OK
 - `archive_session` sur a, b, c, d, e → `list_sessions` : 5 × `SESSION_STATUS_ARCHIVED`.
+
+# Tour 2 : tout en autonomie
+
+## F arsenal installé par l'enfant lui-même (mode auto) : KO
+- Message de test-pilote-f : « Le classifieur du mode auto a refusé `claude plugin marketplace add mirkobozzetto/arsenal` (raison : [Untrusted Code Integration]). … /next:next n'est pas dans mes commandes disponibles. »
+- Un enfant ne peut pas installer de code tiers sur ordre d'une autre session.
+
+## H relève via git : OK
+- HANDOFF.md poussé (commit 87f23c6), puis `create_session(source_url=herdr-app-config, source_revision=claude/intelligent-darwin-2ss3j0)`.
+- Reçu : « Résumé pilotage/HANDOFF.md : Fait : T1 à T13 testés … Mot de contrôle : PERROQUET-42 ».
+
+## G PROMPT.md joué par une autre session : OK
+- test-pilote-g reçoit PROMPT.md + une tâche. Il crée session_01HPjfkbRmfs8ieMzzCQBGAe, lui écrit, fait le tableau, l'archive.
+- Rapport reçu : ok.txt « UN » puis « UN\nDEUX » ; outils create_session, send_message, list_sessions, archive_session ; « Aucune erreur. »
+
+## Environnement Arsenal : créé
+- `create_environment(name="Arsenal", allowed_hosts=["github.com"], setup_script=<setup.sh>)` → `env_01HGYvLXHVk3UtjTfCHesRia`, `has_setup_script: true`.
+
+## I arsenal dans une session de l'environnement Arsenal : OK
+- `create_session(test-pilote-i, environment_id=env_01HGYvLXHVk3UtjTfCHesRia, prompt="/next:next")`.
+- Init : plugins `brief@arsenal 2.5.0, propose@arsenal 2.5.0, ship@arsenal 1.14.2, next@arsenal 1.7.1, trace@arsenal 1.2.1, issue@arsenal 1.3.0, review@arsenal 1.1.0` ; `slash_commands` contient `next:next`.
+- L'enfant lance `node /root/.claude/plugins/cache/arsenal/next/1.7.1/skills/next/scripts/scan.cjs --claude-code` → « No open brief/propose work found. Nothing to resume. »
+- Hook SessionStart : `hooks_init_origin_ms: {"other_plugin":198}`, aucune sortie de hook visible dans les événements.
+
+## Fermeture tour 2 : OK
+- f, g, g-enfant (archivée par g), h, i → `SESSION_STATUS_ARCHIVED`.
